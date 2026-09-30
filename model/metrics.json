@@ -22,5 +22,5 @@
     "condition"
   ],
   "algorithm": "Gradient Boosting Regressor",
-  "sklearn_version": "1.8.0"
+  "sklearn_version": "1.9.1"
 }

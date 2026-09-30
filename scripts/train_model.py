@@ -22,7 +22,12 @@ import warnings
 import numpy as np
 import pandas as pd
 import joblib
-import shap
+try:
+    import shap
+    _SHAP_AVAILABLE = True
+except Exception:
+    shap = None  # type: ignore
+    _SHAP_AVAILABLE = False
 import matplotlib
 matplotlib.use("Agg")  # Non-interactive backend for servers
 import matplotlib.pyplot as plt
@@ -313,6 +318,8 @@ def compute_shap(pipeline, X_train: pd.DataFrame, X_test: pd.DataFrame) -> dict:
     X_sample = X_train_scaled.sample(sample_size, random_state=42)
 
     try:
+        if not _SHAP_AVAILABLE:
+            raise ImportError("shap not available")
         # SHAP explainer
         explainer = shap.TreeExplainer(model)
 

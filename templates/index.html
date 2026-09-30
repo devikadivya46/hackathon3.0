@@ -176,6 +176,56 @@ footer { border-top: 1px solid var(--border); padding: 40px 24px; }
   .algoc { grid-template-columns: 1fr; }
   .nav-links { display: none; }
 }
+
+/* COMPARE */
+.cmp-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 32px; }
+.cmp-card { padding: 24px; position: relative; }
+.cmp-card-hd { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.cmp-label { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.cmp-tag { width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: #000; font-size: 0.72rem; font-weight: 700; display: grid; place-items: center; font-family: 'DM Mono', monospace; }
+.cmp-tag.b { background: var(--blue); color: #fff; }
+.cmp-tag.c { background: var(--green); color: #fff; }
+.cmp-remove { background: transparent; border: none; color: var(--text3); cursor: pointer; font-size: 0.8rem; padding: 4px 8px; border-radius: 6px; transition: all var(--tr); }
+.cmp-remove:hover { color: var(--red); background: rgba(242,112,112,0.1); }
+.cmp-card .fg { margin-bottom: 14px; }
+.cmp-bar-area { display: flex; flex-direction: column; gap: 32px; }
+.add-prop-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px; background: transparent; border: 1px dashed var(--border); border-radius: var(--r); color: var(--text2); font-family: 'DM Sans', sans-serif; font-size: 0.88rem; cursor: pointer; transition: all var(--tr); }
+.add-prop-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--aglow); }
+.cmp-btn-row { display: flex; align-items: center; gap: 16px; justify-content: center; margin: 8px 0 40px; }
+.cmp-btn { padding: 14px 40px; background: linear-gradient(135deg, var(--accent), var(--accent2)); border: none; border-radius: 10px; color: #000; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all var(--tr); box-shadow: 0 8px 20px var(--aglow); }
+.cmp-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 12px 36px var(--aglow); }
+.cmp-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.cmp-results { display: none; }
+.cmp-results.visible { display: block; }
+.cmp-chart-wrap { padding: 28px; margin-bottom: 24px; }
+.cmp-chart-hd { font-size: 0.82rem; color: var(--text2); margin-bottom: 16px; display: flex; align-items: center; gap: 7px; }
+.cmp-badges { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+.cmp-badge { display: flex; align-items: center; gap: 10px; padding: 14px 20px; border-radius: var(--r); flex: 1; min-width: 200px; }
+.cmp-badge.cheapest { background: rgba(76,175,125,0.1); border: 1px solid rgba(76,175,125,0.3); }
+.cmp-badge.bestval { background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); }
+.cmp-badge-ico { font-size: 1.4rem; }
+.cmp-badge-txt { display: flex; flex-direction: column; gap: 2px; }
+.cmp-badge-lbl { font-size: 0.68rem; font-family: 'DM Mono', monospace; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text2); }
+.cmp-badge-val { font-size: 0.95rem; font-weight: 600; }
+.cmp-badge.cheapest .cmp-badge-val { color: var(--green); }
+.cmp-badge.bestval .cmp-badge-val { color: var(--accent); }
+.cmp-table-wrap { padding: 24px; overflow-x: auto; }
+.cmp-table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+.cmp-table th { text-align: left; padding: 10px 14px; font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text2); border-bottom: 1px solid var(--border); }
+.cmp-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); }
+.cmp-table tr:last-child td { border-bottom: none; }
+.cmp-table .price-cell { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 700; color: var(--accent); }
+.cmp-table .winner-row td { background: rgba(201,168,76,0.06); }
+.cmp-prop-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 600; }
+.cmp-prop-badge .dot-a { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); display: inline-block; }
+.cmp-prop-badge .dot-b { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); display: inline-block; }
+.cmp-prop-badge .dot-c { width: 8px; height: 8px; border-radius: 50%; background: var(--green); display: inline-block; }
+.cmp-error { color: var(--red); font-size: 0.82rem; text-align: center; padding: 12px; background: rgba(242,112,112,0.08); border-radius: 8px; margin-bottom: 12px; display: none; }
+
+@media (max-width: 900px) {
+  .cmp-cards { grid-template-columns: 1fr; }
+  .cmp-badges { flex-direction: column; }
+}
 </style>
 </head>
 <body>
@@ -188,6 +238,7 @@ footer { border-top: 1px solid var(--border); padding: 40px 24px; }
     </a>
     <div class="nav-links">
       <a href="#predict">Predict</a>
+      <a href="#compare">Compare</a>
       <a href="#metrics">Metrics</a>
     </div>
     <button class="theme-btn" id="themeBtn">
@@ -394,6 +445,257 @@ footer { border-top: 1px solid var(--border); padding: 40px 24px; }
       </div>
 
     </div>
+  </div>
+</section>
+
+<section id="compare">
+  <div class="container">
+    <div class="sec-hd">
+      <p class="eyebrow">Side-by-Side Analysis</p>
+      <h2 class="sec-title">Compare Properties</h2>
+      <p class="sec-sub">Analyze two or three properties side by side using the same AI pricing model.</p>
+    </div>
+
+    <!-- Property cards row -->
+    <div class="cmp-cards" id="cmpCards">
+
+      <!-- Property A -->
+      <div class="cmp-card glass" id="cmpCardA">
+        <div class="cmp-card-hd">
+          <span class="cmp-label"><span class="cmp-tag">A</span> Property A</span>
+        </div>
+        <div class="frow">
+          <div class="fg">
+            <label for="compare-a-area"><i class="fa-solid fa-vector-square"></i> Area (sq ft)</label>
+            <input type="number" id="compare-a-area" placeholder="e.g. 2100" min="100" max="20000" value="2100"/>
+          </div>
+          <div class="fg">
+            <label for="compare-a-floors"><i class="fa-solid fa-layer-group"></i> Floors</label>
+            <select id="compare-a-floors">
+              <option value="1">1 Floor</option>
+              <option value="2" selected>2 Floors</option>
+              <option value="3">3 Floors</option>
+              <option value="4">4+ Floors</option>
+            </select>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fg">
+            <label><i class="fa-solid fa-bed"></i> Bedrooms</label>
+            <div class="stepper" id="cmp-a-sbeds">
+              <button type="button" class="sb minus">-</button>
+              <input type="number" id="compare-a-bedrooms" value="3" min="1" max="20" readonly/>
+              <button type="button" class="sb plus">+</button>
+            </div>
+          </div>
+          <div class="fg">
+            <label><i class="fa-solid fa-shower"></i> Bathrooms</label>
+            <div class="stepper" id="cmp-a-sbaths">
+              <button type="button" class="sb minus">-</button>
+              <input type="number" id="compare-a-bathrooms" value="2" min="1" max="15" readonly/>
+              <button type="button" class="sb plus">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="fg">
+          <label for="compare-a-year"><i class="fa-solid fa-calendar-days"></i> Year Built</label>
+          <input type="range" id="compare-a-year" class="rs" min="1900" max="2025" value="2000"/>
+          <div class="rl"><span>1900</span><span class="rv" id="cmp-a-yearV">2000</span><span>2025</span></div>
+        </div>
+        <div class="fg">
+          <label for="compare-a-location"><i class="fa-solid fa-star"></i> Location Score <span class="ln">(1–10)</span></label>
+          <input type="range" id="compare-a-location" class="rs" min="1" max="10" value="6"/>
+          <div class="rl"><span>Rural</span><span class="rv" id="cmp-a-locV">6</span><span>Prime</span></div>
+        </div>
+        <div class="fg">
+          <label for="compare-a-condition"><i class="fa-solid fa-house-circle-check"></i> Condition</label>
+          <input type="range" id="compare-a-condition" class="rs" min="1" max="10" value="7"/>
+          <div class="rl"><span>Poor</span><span class="rv g" id="cmp-a-condV">7</span><span>Excellent</span></div>
+        </div>
+        <div class="fg">
+          <label><i class="fa-solid fa-star-of-life"></i> Amenities</label>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" id="compare-a-garage" checked/><span class="chip-in"><i class="fa-solid fa-car"></i> Garage</span></label>
+            <label class="chip"><input type="checkbox" id="compare-a-pool"/><span class="chip-in"><i class="fa-solid fa-water-ladder"></i> Pool</span></label>
+            <label class="chip"><input type="checkbox" id="compare-a-garden" checked/><span class="chip-in"><i class="fa-solid fa-seedling"></i> Garden</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Property B -->
+      <div class="cmp-card glass" id="cmpCardB">
+        <div class="cmp-card-hd">
+          <span class="cmp-label"><span class="cmp-tag b">B</span> Property B</span>
+        </div>
+        <div class="frow">
+          <div class="fg">
+            <label for="compare-b-area"><i class="fa-solid fa-vector-square"></i> Area (sq ft)</label>
+            <input type="number" id="compare-b-area" placeholder="e.g. 1800" min="100" max="20000" value="1800"/>
+          </div>
+          <div class="fg">
+            <label for="compare-b-floors"><i class="fa-solid fa-layer-group"></i> Floors</label>
+            <select id="compare-b-floors">
+              <option value="1">1 Floor</option>
+              <option value="2" selected>2 Floors</option>
+              <option value="3">3 Floors</option>
+              <option value="4">4+ Floors</option>
+            </select>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fg">
+            <label><i class="fa-solid fa-bed"></i> Bedrooms</label>
+            <div class="stepper" id="cmp-b-sbeds">
+              <button type="button" class="sb minus">-</button>
+              <input type="number" id="compare-b-bedrooms" value="2" min="1" max="20" readonly/>
+              <button type="button" class="sb plus">+</button>
+            </div>
+          </div>
+          <div class="fg">
+            <label><i class="fa-solid fa-shower"></i> Bathrooms</label>
+            <div class="stepper" id="cmp-b-sbaths">
+              <button type="button" class="sb minus">-</button>
+              <input type="number" id="compare-b-bathrooms" value="2" min="1" max="15" readonly/>
+              <button type="button" class="sb plus">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="fg">
+          <label for="compare-b-year"><i class="fa-solid fa-calendar-days"></i> Year Built</label>
+          <input type="range" id="compare-b-year" class="rs" min="1900" max="2025" value="2010"/>
+          <div class="rl"><span>1900</span><span class="rv" id="cmp-b-yearV">2010</span><span>2025</span></div>
+        </div>
+        <div class="fg">
+          <label for="compare-b-location"><i class="fa-solid fa-star"></i> Location Score <span class="ln">(1–10)</span></label>
+          <input type="range" id="compare-b-location" class="rs" min="1" max="10" value="8"/>
+          <div class="rl"><span>Rural</span><span class="rv" id="cmp-b-locV">8</span><span>Prime</span></div>
+        </div>
+        <div class="fg">
+          <label for="compare-b-condition"><i class="fa-solid fa-house-circle-check"></i> Condition</label>
+          <input type="range" id="compare-b-condition" class="rs" min="1" max="10" value="8"/>
+          <div class="rl"><span>Poor</span><span class="rv g" id="cmp-b-condV">8</span><span>Excellent</span></div>
+        </div>
+        <div class="fg">
+          <label><i class="fa-solid fa-star-of-life"></i> Amenities</label>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" id="compare-b-garage" checked/><span class="chip-in"><i class="fa-solid fa-car"></i> Garage</span></label>
+            <label class="chip"><input type="checkbox" id="compare-b-pool"/><span class="chip-in"><i class="fa-solid fa-water-ladder"></i> Pool</span></label>
+            <label class="chip"><input type="checkbox" id="compare-b-garden"/><span class="chip-in"><i class="fa-solid fa-seedling"></i> Garden</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Property C (hidden by default) -->
+      <div class="cmp-card glass" id="cmpCardC" style="display:none;">
+        <div class="cmp-card-hd">
+          <span class="cmp-label"><span class="cmp-tag c">C</span> Property C</span>
+          <button type="button" class="cmp-remove" id="cmpRemoveC" title="Remove Property C">
+            <i class="fa-solid fa-xmark"></i> Remove
+          </button>
+        </div>
+        <div class="frow">
+          <div class="fg">
+            <label for="compare-c-area"><i class="fa-solid fa-vector-square"></i> Area (sq ft)</label>
+            <input type="number" id="compare-c-area" placeholder="e.g. 3200" min="100" max="20000"/>
+          </div>
+          <div class="fg">
+            <label for="compare-c-floors"><i class="fa-solid fa-layer-group"></i> Floors</label>
+            <select id="compare-c-floors">
+              <option value="1">1 Floor</option>
+              <option value="2">2 Floors</option>
+              <option value="3" selected>3 Floors</option>
+              <option value="4">4+ Floors</option>
+            </select>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fg">
+            <label><i class="fa-solid fa-bed"></i> Bedrooms</label>
+            <div class="stepper" id="cmp-c-sbeds">
+              <button type="button" class="sb minus">-</button>
+              <input type="number" id="compare-c-bedrooms" value="4" min="1" max="20" readonly/>
+              <button type="button" class="sb plus">+</button>
+            </div>
+          </div>
+          <div class="fg">
+            <label><i class="fa-solid fa-shower"></i> Bathrooms</label>
+            <div class="stepper" id="cmp-c-sbaths">
+              <button type="button" class="sb minus">-</button>
+              <input type="number" id="compare-c-bathrooms" value="3" min="1" max="15" readonly/>
+              <button type="button" class="sb plus">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="fg">
+          <label for="compare-c-year"><i class="fa-solid fa-calendar-days"></i> Year Built</label>
+          <input type="range" id="compare-c-year" class="rs" min="1900" max="2025" value="2015"/>
+          <div class="rl"><span>1900</span><span class="rv" id="cmp-c-yearV">2015</span><span>2025</span></div>
+        </div>
+        <div class="fg">
+          <label for="compare-c-location"><i class="fa-solid fa-star"></i> Location Score <span class="ln">(1–10)</span></label>
+          <input type="range" id="compare-c-location" class="rs" min="1" max="10" value="7"/>
+          <div class="rl"><span>Rural</span><span class="rv" id="cmp-c-locV">7</span><span>Prime</span></div>
+        </div>
+        <div class="fg">
+          <label for="compare-c-condition"><i class="fa-solid fa-house-circle-check"></i> Condition</label>
+          <input type="range" id="compare-c-condition" class="rs" min="1" max="10" value="9"/>
+          <div class="rl"><span>Poor</span><span class="rv g" id="cmp-c-condV">9</span><span>Excellent</span></div>
+        </div>
+        <div class="fg">
+          <label><i class="fa-solid fa-star-of-life"></i> Amenities</label>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" id="compare-c-garage" checked/><span class="chip-in"><i class="fa-solid fa-car"></i> Garage</span></label>
+            <label class="chip"><input type="checkbox" id="compare-c-pool" checked/><span class="chip-in"><i class="fa-solid fa-water-ladder"></i> Pool</span></label>
+            <label class="chip"><input type="checkbox" id="compare-c-garden" checked/><span class="chip-in"><i class="fa-solid fa-seedling"></i> Garden</span></label>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.cmp-cards -->
+
+    <!-- Add Property C button (shown when C is hidden) -->
+    <button type="button" class="add-prop-btn" id="cmpAddC">
+      <i class="fa-solid fa-plus"></i> Add Property C
+    </button>
+
+    <!-- Action row -->
+    <div class="cmp-btn-row">
+      <div class="cmp-error" id="cmpError"></div>
+      <button type="button" class="cmp-btn" id="cmpBtn">
+        <i class="fa-solid fa-scale-balanced"></i> Compare Prices
+      </button>
+    </div>
+
+    <!-- Results area -->
+    <div class="cmp-results" id="cmpResults">
+
+      <!-- Badges -->
+      <div class="cmp-badges" id="cmpBadges"></div>
+
+      <!-- Bar chart -->
+      <div class="cmp-chart-wrap glass">
+        <p class="cmp-chart-hd"><i class="fa-solid fa-chart-bar"></i> Estimated Property Prices</p>
+        <canvas id="cmpChart" height="120"></canvas>
+      </div>
+
+      <!-- Summary table -->
+      <div class="cmp-table-wrap glass">
+        <table class="cmp-table">
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Area (sq ft)</th>
+              <th>Beds</th>
+              <th>Price</th>
+              <th>$/sq ft</th>
+            </tr>
+          </thead>
+          <tbody id="cmpTableBody"></tbody>
+        </table>
+      </div>
+
+    </div><!-- /.cmp-results -->
+
   </div>
 </section>
 
@@ -655,5 +957,6 @@ $('predictForm').addEventListener('submit', async function(e) {
   }
 });
 </script>
+<script src="/static/js/compare.js"></script>
 </body>
 </html>
